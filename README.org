@@ -6,7 +6,7 @@ As many of have found that starting a new project can get tedious. First you nee
 
 After dealing with this frustration numerous times and annoyed with all the separate utilities for various ecosystems, I decided to create a cohesive system to rapidly template projects from TOML configuration files.
 
-This is my successor, rewrite, and pivoting idea from my previous [[https://github.com/ParthTri/Creo][Scaf]].
+This is my successor, rewrite, and pivoting idea from my previous [[https://github.com/ParthTri/Creo][Creo]].
 
 * Table of Contents                                                     :toc:
 - [[#overview][Overview]]

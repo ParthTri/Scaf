@@ -6,6 +6,10 @@ import (
 	"os"
 )
 
+type ConfigDir struct {
+	Path			string
+	Templates []os.DirEntry
+}
 
 func FindConfigDir() (string, error) {
 	config_dir, _ := os.UserConfigDir()

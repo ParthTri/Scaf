@@ -49,7 +49,7 @@ To use Scaf run ~scaf~ in the terminal. From here you will be asked to enter the
   scaf
 #+end_src
 
-By default the ~example.json~ will be used if the configuration file at ~$XDG_Config/scaf/config.json~ is not found.
+By default the templates will be found in the ~~/.config/scaf/~ folder in a series of ~.toml~ that contain the configuration for each template type.
 
 And thats it.
 
@@ -60,9 +60,59 @@ To use a specify the template without going through the input statements use the
 
 Similarly to quickly set the name of the project use the ~-n~ flag, followed by the name of the project.
 
-* Configuration
-The greatest part of this utility is the ease of configuration of templates using the simple configuration file.
+* TODO Configuration
+The greatest part of this utility is the ease of configuration of templates using the template files.
 Here is an example configuration:
+#+begin_src toml
+  title = "Go" # Optional
+  description = "Template for quickly setting up Go projects" # Optional
+
+  # All configuration related to git
+  [git]
+  enabled = false
+
+  [hooks]
+  # Runs shell programs before the project is created
+  # NOTE this means before the directory is created
+  before = [""]
+
+  # Runs shell programs after the project is created
+  after = ["go mod init $name"]
+
+  [dirs]
+  # Creates a blank directory called src
+  src = []
+
+  # Creates a directory 'lib' with a subdirectory 'test'
+  lib = ["test"]
+
+  # Creates a subdirectory 'more_tests' under directories lib/test
+  lib.test = ["more_tests"]
+
+  [files]
+  # The root directory is reserved for the project directory root 
+  root = [".env"]
+
+  # Creates 'src/main.go' and 'src/main_test.go'
+  src = ["main.go", "main_test.go"]
+
+  # The same dot notation can be used to create files in directories
+  lib.test = ["test.go"] # creates lib/test/test.go
+
+
+  [content]
+  # To add text into files the following can be used
+  # This only works as long as the directory and filenames match up
+  src."main.go" = """package main
+  import ""
+  func main() {
+
+  }
+  """
+
+  # Will write contents in to 'Project/.env'
+  root.".env" = ".secret_keys/"
+#+end_src
 
 The first part of any template is the template name, denoted as a key.
 

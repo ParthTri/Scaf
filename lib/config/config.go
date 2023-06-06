@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type ConfigDir struct {
@@ -30,4 +31,16 @@ func FindConfigDir() (string, error) {
 	}
 
 	return "", errors.New("Config files not found")
+}
+
+func (config ConfigDir)FindTemplate(template string) (os.DirEntry, error) {
+	templates := len(config.Templates)
+
+	for i := 0; i < templates; i++ {
+		if strings.ToLower(config.Templates[i].Name()) == strings.ToLower(template) {
+			return config.Templates[i], nil
+		}
+	}
+
+	return nil, errors.New("Template not found")
 }

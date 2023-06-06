@@ -17,3 +17,18 @@ func TestFindConfigDir(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestFindTemplate(t *testing.T) {
+	tmp := ConfigDir{}
+
+	file_path, _ := FindConfigDir()
+
+	tmp.Path = file_path
+	tmp.Templates, _ = os.ReadDir(file_path)
+	
+	_, err := tmp.FindTemplate("example.toml")
+
+	if err != nil {
+		t.Fail()
+	}
+}

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/pelletier/go-toml"
 )
 
 type ConfigDir struct {
@@ -51,4 +53,18 @@ func (config ConfigDir)FindTemplate(template string) (string, error) {
 	return "", errors.New("Template not found")
 }
 
+func ReadTemplate(target string) (*Template, error) { 
+	var current Template
+
+	data, err := os.ReadFile(target)
+	if err != nil {
+		return &Template{}, err
+	}
+	err = toml.Unmarshal(data, &current)
+
+	if err != nil {
+		return &Template{}, err;
+	}
+
+	return &current, nil
 }

@@ -12,6 +12,11 @@ type ConfigDir struct {
 	Templates []os.DirEntry
 }
 
+type Template struct {
+	Title				string
+	Description string
+}
+
 func FindConfigDir() (string, error) {
 	config_dir, _ := os.UserConfigDir()
 	config_dir = fmt.Sprintf("%v/scaf/", config_dir)	

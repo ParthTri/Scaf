@@ -21,7 +21,7 @@ src = []
 lib = ["test"]
 
 # Creates a subdirectory 'more_tests' under directories lib/test
-lib.test = ["more_tests"]
+# lib.test = ["more_tests"]
 
 [files]
 # The root directory is reserved for the project directory root 

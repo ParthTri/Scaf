@@ -33,14 +33,17 @@ func FindConfigDir() (string, error) {
 	return "", errors.New("Config files not found")
 }
 
-func (config ConfigDir)FindTemplate(template string) (os.DirEntry, error) {
+func (config ConfigDir)FindTemplate(template string) (string, error) {
 	templates := len(config.Templates)
 
 	for i := 0; i < templates; i++ {
 		if strings.ToLower(config.Templates[i].Name()) == strings.ToLower(template) {
-			return config.Templates[i], nil
+			file := fmt.Sprintf("%v%v", config.Path, config.Templates[i].Name())
+			return file, nil
 		}
 	}
 
-	return nil, errors.New("Template not found")
+	return "", errors.New("Template not found")
+}
+
 }
